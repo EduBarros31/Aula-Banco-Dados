@@ -188,3 +188,44 @@ SELECT *FROM USUARIO;
 
 
 -- AULA DIA 04/12
+
+AULA DIA 05/12
+
+
+INSERT INTO USUARIO(id,nome_usuario, email)
+VALUES(3,'eduardo', 'edu@gmail.com');
+
+SELECT *FROM USUARIO;
+
+INSERT INTO EDITORA(id, NOME_EDITORA)
+VALUES (1, 'nome'), (2, 'sesc'), (3,'mundo');
+SELECT * FROM EDITORA;
+
+INSERT INTO GENERO (ID, NOME_GENERO)
+VALUES(1, 'terror'),(2, 'drama'),(3,' Romance'), (4, 'Ficçao'), (5, 'infantil');
+select * from GENERO;
+
+INSERT INTO LIVRO(titulo, quantidade, id_editora,id_genero)
+VALUES ( 'El Capo dei capi', 2 , 3, 2);
+
+
+
+INSERT INTO LIVRO(titulo, quantidade, id_editora,id_genero)
+VALUES ( 'CASA DO DRAGÃO', 2, 2,3);
+
+INSERT INTO LIVRO(titulo, quantidade, id_editora,id_genero)
+VALUES ( 'LORD OF THE RINGS', 4, 2,4);
+
+
+INSERT INTO LIVRO(titulo, quantidade, id_editora,id_genero)
+VALUES ( 'SANDMAN', 1, 2,4);
+
+
+INSERT INTO LIVRO(titulo, quantidade, id_editora,id_genero)
+VALUES ( 'THE WITCHER ', 4, 2,4);
+SELECT *FROM LIVRO;
+ 
+INSERT INTO EMPRESTIMO(ID_LIVRO,ID_USUARIO,DATA_FIM)
+VALUES (1,5,'2024-12-10');
+
+SELECT * FROM EMPRESTIMO
