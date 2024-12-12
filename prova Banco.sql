@@ -102,3 +102,71 @@ VALUES(1,1,1.350.00,2023-06-15),
 VALUES(2,2,2,450.00,2023-07-15),
 VALUES(3,2,4,600.00,2023-07-10),
 VALUES(4,4,4,300.00,2023-09-25)
+
+
+-- Consultas para verificar os dados inseridos
+SELECT * FROM cliente;
+SELECT * FROM servico;
+SELECT * FROM tecnico;
+SELECT * FROM chamado;
+SELECT * FROM pagamento;
+
+-- Consultar email de todos os clientes
+SELECT nome, email
+FROM cliente;
+
+--Consultar preço de todos os serviços
+SELECT nome, preco
+FROM servico;
+
+-- Consultar nome e especialidade dos tecnicos
+SELECT nome, especialidade
+FROM tecnico;
+
+-- Consultar descrição e status dos chamados
+SELECT descricao, status
+FROM chamado;
+
+--Consultar valor pago e data de pagamento
+SELECT valor_pago, data_pagamento
+FROM pagamento;
+
+--Consultar nome do cliente e descrição dos seus chamados EM ANDAMENTO
+SELECT cliente.nome, chamado.descricao
+FROM cliente
+JOIN chamado on cliente_id = chamado.id
+WHERE chamado.status = 'Em Andamento';
+
+-- Recupera os nomes dos técnicos que realizaram serviços com o tipo "Manutenção".
+SELECT tecnico.nome, tecnico.especialidade
+FROM tecnico
+WHERE tecnico.especialidade = 'Manutenção';
+
+--Mostra os nomes dos clientes e o valor total pago por cada um deles.
+SELECT cliente.nome, valor_pago
+FROM cliente 
+JOIN pagamento on cliente_id = pagamento.id
+WHERE (valor_pago > 0)
+
+-- Listar os clientes e os serviços que eles solicitaram, incluindo a descrição do serviço.
+SELECT cliente.nome, servico.nome, servico.descricao, servico.preco, servico.tipo_servico
+FROM cliente
+JOIN servico on cliente.id = servico.id
+
+--Recupera os nomes dos técnicos que realizaram chamados para serviços com o preço superior a 400, e exiba também o nome do serviço.
+SELECT tecnico.nome, servico.preco, servico.nome
+FROM tecnico, servico
+WHERE (servico.preco > 400)
+
+--Atualiza o preço de todos os serviços do tipo "Manutenção" para 350, se o preço atual for inferior a 350
+SELECT * FROM servico
+UPDATE servico
+SET preco = 350
+WHERE tipo_servico = 'Manutenção' AND preco < 350;
+SELECT * FROM servico
+
+-- Deletar todos os tecnicos sem chamado registrado
+SELECT * FROM tecnico
+WHERE id NOT IN (SELECT DISTINCT tecnico_id FROM chamado);
+SELECT * FROM TECNICO
+SELECT * FROM CHAMADO
