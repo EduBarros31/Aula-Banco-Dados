@@ -45,6 +45,8 @@ ID SERIAL PRIMARY KEY,
 CLIENTE_ID INT ON DELETE CASCADE,
 TECNICO_ID INT ON DELETE CASCADE,
 SERVICO_ID INT ON DELETE CASCADE,
+DATA_CHAMADO DATA PADRAO CURRENT_DATE,
+STATUS VARCHAR(20) NOT NULL,
 DATA_CHAMADO DATE NOT NULL,
 DESCRICAO TEXT NOT NULL
 
@@ -77,31 +79,36 @@ CONSTRAINT TIPO_SERVICO CHECK(STATUS = 'PEDENDETE' OR STATUS = 'EM ANDAMENTO' OR
 
 INSERT INTO CLIENTE (ID, NOME, EMAIL, TELEFONE, DATA_CADASTRO)
 VALUES (1,'JOÂO SILVA', 'joao@email.com', '(11) 987565-4321',2023-01-15),
-VALUES(2,'Maria Oliveira','maria@email.com','(21) 99654-321', 2023-02-20),
-VALUES(3,'Pedro Souza', 'pedro@email.com', '(31) 99765-1234', 2023-03-10),
-VALUES(4,'Ana Costa','ana@email.com','(41) 98888-9999',2023-04-25),
-VALUES(5,'Lucas Almeida','lucas@email.com', '(61) 99123-4567',2023-05-30);
+(2,'Maria Oliveira','maria@email.com','(21) 99654-321', 2023-02-20),
+(3,'Pedro Souza', 'pedro@email.com', '(31) 99765-1234', 2023-03-10),
+(4,'Ana Costa','ana@email.com','(41) 98888-9999',2023-04-25),
+(5,'Lucas Almeida','lucas@email.com', '(61) 99123-4567',2023-05-30);
 
 
 INSERT INTO SERVICO (ID, NOME, DESCRICAO, PRECO, TIPO_SERVICO)
 VALUES (1,'Consultoria em TI', 'Consultoria especializada em infraestrutura de TI', 500.00, ' CONSULTORIA' ),
-VALUES (2,'Manutenção de Equipamentos','Manutenção preventiva e corretiva de equipamentos',300.00,'Manutenção'),
-VALUES(3,'Suporte Técnico', 'Suporte remoto e presencial para empresa', 200.00, 'Suporte'),
+ (2,'Manutenção de Equipamentos','Manutenção preventiva e corretiva de equipamentos',300.00,'Manutenção'),
+(3,'Suporte Técnico', 'Suporte remoto e presencial para empresa', 200.00, 'Suporte');
+
+INSERT INTO TECNICO (NOME,ESPECIALIDADE, TELEFONE, DATA_CONTRATACAO)
+VALUES('Carlos Oliveira', 'Consultoria em TI','(84) 9876-3456', '2022-10-10'),
+('Fernanda Souza', 'Manutencao','(84) 9345=4567','2021-06-15'),
+('Roberto Costa', 'Suporte Tecnico','(85) 9234=5479'. '2020-08-20');
 
 
 INSERT INTO CHAMADO(CLIENTE_ID, TECNICO_ID, SERVICO_ID,DATA_CHAMADO, STATUS, DESCRICAO)
 VALUES (1,1,1,2023-06-01,'ABERTO','Fiação da casa queimada'),
-VALUES(2,2,2,2023-07-10,'em andamento','Vazamento na tubulação'),
-VALUES(3,3,3,2023-08-05,'CONCLUIDO','Reparação no ar-condicionado'),
-VALUES(4,4,1,2,2023-09-20,'aberto','Manutenção no servidor'),
-VALUES(5,5,2,1,2023-10-15,'concluído','Suporte para software')
+(2,2,2,2023-07-10,'em andamento','Vazamento na tubulação'),
+(3,3,3,2023-08-05,'CONCLUIDO','Reparação no ar-condicionado'),
+(4,4,1,2,2023-09-20,'aberto','Manutenção no servidor'),
+(5,5,2,1,2023-10-15,'concluído','Suporte para software');
 
 
 INSERT INTO PAGAMENTO(CLIENTE_ID,CHAMADO_ID,VALOR_PAGO,DATA_PAGAMENTO)
-VALUES(1,1,1.350.00,2023-06-15),
-VALUES(2,2,2,450.00,2023-07-15),
-VALUES(3,2,4,600.00,2023-07-10),
-VALUES(4,4,4,300.00,2023-09-25)
+VALUES(1,1,1.350.00,'2023-06-15'),
+(2,2,2,450.00,'2023-07-15', 'Crédito'),
+(3,2,4,600.00,'2023-07-10','Crédito'),
+(4,4,4,300.00,'2023-09-25','Crédito');
 
 
 -- Consultas para verificar os dados inseridos
